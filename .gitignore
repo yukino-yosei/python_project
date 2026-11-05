@@ -1,2 +1,4 @@
 .env
 clear_db.py
+db.db
+__pycache__/
