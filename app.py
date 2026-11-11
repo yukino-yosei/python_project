@@ -1,8 +1,9 @@
 import streamlit as st
 from datetime import date
 import db
-from api import get_video
+from api import get_video, get_rest_api_data
 import json
+import pandas as pd
 
 db.init_db()
 
@@ -34,3 +35,13 @@ else :
         st.write(f"{i} - {log_data[i]}")
 # except :
     # print("오류 발생")
+st.write('- - -')
+rst = get_rest_api_data()
+df = pd.DataFrame({
+    'ID' : i['id'],
+    'EMAIL' : i['email'],
+    'ZIPCODE' : i['address']['zipcode'],
+    'LAT' : i['address']['geo']['lat'],
+    'LNG' : i['address']['geo']['lng']
+} for i in rst)
+st.dataframe(df)

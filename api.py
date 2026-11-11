@@ -25,3 +25,9 @@ def get_video(input_url) :
     response = requests.get(url, params = params, timeout = 10).json()
 
     return response
+
+def get_rest_api_data() :
+    url = 'https://rest-api-test-self.vercel.app/api/3'
+    response = requests.get(url, timeout = 10).json()
+
+    return response
