@@ -1,4 +1,5 @@
 .env
 clear_db.py
 db.db
+patten_move
 __pycache__/

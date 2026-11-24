@@ -4,6 +4,7 @@ import db
 from api import get_video, get_rest_api_data
 import json
 import pandas as pd
+from ai import sort_by_AC
 
 db.init_db()
 
@@ -30,9 +31,17 @@ if st.button('조회') :
 if log_data is None :
     st.write('로그가 없습니다.')
 else :
+    sorted_log = list(log_data.values())
+
+    sorted_log = sort_by_AC(data['items'][0]['snippet']['title'], sorted_log)
+
+    final_log = {}
+    for i, j in log_data.items() :
+        final_log[j] = i
+
     st.write('검색 로그')
-    for i in log_data :
-        st.write(f"{i} - {log_data[i]}")
+    for i in sorted_log :
+        st.write(f"{final_log[i]} - {i}")
 # except :
     # print("오류 발생")
 st.write('- - -')
